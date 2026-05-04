@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Your Babies</h2>
+
+<div class="card">
+
+
+{% for baby in babies %}
+    <p>{{ baby.name }} - {{ baby.dob }}</p>
+    <a href="{% url 'edit_baby' baby.id %}">Edit</a>
+    <a href="{% url 'delete_baby' baby.id %}">Delete</a>
+<a href="{% url 'view_growth' baby.id %}">View Growth</a>
+<a href="{% url 'vaccination_list' baby.id %}">Vaccinations</a>
+{% empty %}
+    <p>No babies added yet</p>
+{% endfor %}
+
+</div>
+
+{% endblock %}

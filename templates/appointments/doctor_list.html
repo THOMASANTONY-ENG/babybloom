@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Doctor Appointments</h2>
+
+<div class="card">
+
+
+{% for a in appointments %}
+<p>
+    Baby: {{ a.baby.name }} |
+    Date: {{ a.date }} |
+    Time: {{ a.time }} |
+    Status: {{ a.status }}
+
+    <a href="{% url 'update_appointment' a.id %}">Update</a>
+    {% if a.status == "completed" %}
+        <a href="{% url 'add_prescription' a.id %}">Add Prescription</a>
+    {% endif %}
+</p>
+{% empty %}
+<p>No appointments</p>
+{% endfor %}
+
+</div>
+
+{% endblock %}

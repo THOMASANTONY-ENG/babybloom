@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Welcome {{ request.user.username }}</h2>
+
+<div class="card">
+    {% if user.is_authenticated %}
+        <p>You are logged in</p>
+    {% else %}
+        <p>You are not logged in</p>
+    {% endif %}
+</div>
+
+{% endblock %}

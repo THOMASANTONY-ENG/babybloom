@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Add Vaccine</h2>
+
+<div class="card">
+
+
+<form method="POST">
+    {% csrf_token %}
+
+    <input name="name" placeholder="Vaccine Name"><br>
+    <input name="recommended_age" placeholder="Recommended Age"><br>
+
+    <button>Add</button>
+</form>
+
+</div>
+
+{% endblock %}

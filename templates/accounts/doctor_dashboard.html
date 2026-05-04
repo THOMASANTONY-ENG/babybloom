@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Doctor Dashboard</h2>
+
+<div class="card">
+    <p>Welcome Dr. {{ request.user.username }}</p>
+    <a href="{% url 'doctor_appointments' %}">View Appointments</a>
+</div>
+
+{% endblock %}

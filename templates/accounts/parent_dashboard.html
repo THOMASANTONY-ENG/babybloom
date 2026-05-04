@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Parent Dashboard</h2>
+
+<div class="card">
+    <p>Welcome {{ request.user.username }}</p>
+    <p><a href="{% url 'add_baby' %}">Add Baby</a></p>
+    <p><a href="{% url 'view_babies' %}">View Babies</a></p>
+    <p><a href="{% url 'book_appointment' %}">Book Appointment</a></p>
+    <p><a href="{% url 'view_appointments' %}">View Appointments</a></p>
+    <p><a href="{% url 'view_prescriptions' %}">View Prescriptions</a></p>
+</div>
+
+{% endblock %}

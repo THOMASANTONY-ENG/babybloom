@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Vaccines</h2>
+
+<div class="card">
+
+
+<a href="{% url 'add_vaccine' %}">Add Vaccine</a>
+
+{% for v in vaccines %}
+    <p>
+        {{ v.name }} ({{ v.recommended_age }})
+
+        <a href="{% url 'delete_vaccine' v.id %}">Delete</a>
+    </p>
+{% empty %}
+    <p>No vaccines added</p>
+{% endfor %}
+
+</div>
+
+{% endblock %}

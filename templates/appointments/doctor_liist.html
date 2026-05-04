@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Doctor Appointments</h2>
+
+<div class="card">
+
+
+{% for a in appointments %}
+    <p>
+        Baby: {{ a.baby.name }} |
+        Date: {{ a.date }} |
+        Time: {{ a.time }} |
+        Status: {{ a.status }}
+
+        <a href="/appointments/update/{{ a.id }}/">Update</a>
+    </p>
+{% empty %}
+    <p>No appointments</p>
+{% endfor %}
+
+</div>
+
+{% endblock %}

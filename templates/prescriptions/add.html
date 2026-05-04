@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Add Prescription</h2>
+
+<div class="card">
+
+
+<p>
+    {{ appointment.baby.name }} with {{ appointment.doctor }}
+</p>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <textarea name="medication" placeholder="Medication"></textarea><br>
+    <input name="dosage" placeholder="Dosage"><br>
+    <textarea name="instructions" placeholder="Instructions"></textarea><br>
+
+    <button type="submit">Save Prescription</button>
+</form>
+
+</div>
+
+{% endblock %}

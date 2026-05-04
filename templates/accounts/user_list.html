@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>All Users</h2>
+
+<div class="card">
+
+
+{% for u in users %}
+    <p>
+        <strong>{{ u.username }}</strong> |
+        Role: {{ u.profile.role }}
+    </p>
+    <a href="{% url 'delete_user' u.id %}" style="padding:10px; background:#eee; border:1px solid #ccc; text-decoration:none;">Delete</a>
+{% empty %}
+    <p>No users found</p>
+{% endfor %}
+
+</div>
+
+{% endblock %}  

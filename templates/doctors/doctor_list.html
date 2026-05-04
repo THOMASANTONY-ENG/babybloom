@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Doctors List</h2>
+
+<div class="card">
+
+ <a href="{% url 'add_doctor' %}">Add Doctor</a>
+
+    {% for d in doctors %}
+        <div style="border:1px solid black; padding:20px;">
+            <h3>Dr. {{ d.user.username }}</h3>
+            <p>{{ d.speciality }}</p>
+            <p>{{ d.experience }}</p>
+            <a href="{% url 'delete_doctor' d.id %}" style="padding:10px; background:#eee; border:1px solid #ccc; text-decoration:none;">Delete</a>     
+            
+        </div>
+    {% empty %}
+        <p>No doctors found</p>
+    {% endfor %}
+
+</div>
+
+{% endblock %}      

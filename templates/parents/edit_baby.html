@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Edit Baby</h2>
+
+<div class="card">
+
+
+<form method="POST">
+    {% csrf_token %}
+
+    <input type="text" name="name" value="{{ baby.name }}"><br>
+    <input type="date" name="dob" value="{{ baby.dob|date:'Y-m-d' }}"><br>
+
+    <select name="gender">
+        <option value="male" {% if baby.gender == "male" %}selected{% endif %}>Male</option>
+        <option value="female" {% if baby.gender == "female" %}selected{% endif %}>Female</option>
+    </select><br>
+
+    <input type="number" step="0.1" name="weight" value="{{ baby.weight }}"><br>
+    <input type="number" step="0.1" name="height" value="{{ baby.height }}"><br>
+
+    <button type="submit">Update</button>
+</form>
+
+</div>
+
+{% endblock %}
