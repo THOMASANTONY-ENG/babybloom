@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block content %}    <h2>Admin Dashboard</h2>
+
+    <!-- 🔹 STATS -->
+    <div class="grid">
+
+        <div class="card">
+            <h3>Users</h3>
+            <p>{{ users }}</p>
+        </div>
+
+        <div class="card">
+            <h3>Doctors</h3>
+            <p>{{ doctors }}</p>
+        </div>
+
+        <div class="card">
+            <h3>Babies</h3>
+            <p>{{ babies }}</p>
+        </div>
+
+        <div class="card">
+            <h3>Appointments</h3>
+            <p>{{ appointments }}</p>
+        </div>
+
+        <div class="card">
+            <h3>Vaccines</h3>
+            <p>{{ vaccines }}</p>
+        </div>
+
+    </div>
+
+    <div class="section">
+        <h3>Recent Appointments</h3>
+        <div class="card">
+            {% for a in recent_appointments %}
+                <div class="item">
+                    {{ a.baby.name }} — {{ a.date }} — {{ a.status }}
+                </div>
+            {% empty %}
+                <p>No appointments</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="section">
+        <h3>Recent Prescriptions</h3>
+        <div class="card">
+            {% for p in recent_prescriptions %}
+                <div class="item">
+                    {{ p.appointment.baby.name }} — {{ p.medication }}
+                </div>
+            {% empty %}
+                <p>No prescriptions</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="section">
+        <h3>Recent Users</h3>
+        <div class="card">
+            {% for u in recent_users %}
+                <div class="item">
+                    {{ u.username }} — {{ u.profile.role }}
+                </div>
+            {% empty %}
+                <p>No users</p>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

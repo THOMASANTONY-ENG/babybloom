@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Prescription Details</h2>
+
+<div class="card">
+
+
+<div class="appointment-info">
+    <p><strong>Baby:</strong> {{ appointment.baby.name }}</p>
+    <p><strong>Doctor:</strong> {{ appointment.doctor }}</p>
+    <p><strong>Date:</strong> {{ appointment.date }}</p>
+</div>
+
+<hr>
+
+<div class="prescription-info">
+    <h3>Medication</h3>
+    <p>{{ prescription.medication|linebreaks }}</p>
+
+    <h3>Dosage</h3>
+    <p>{{ prescription.dosage }}</p>
+
+    <h3>Instructions</h3>
+    <p>{{ prescription.instructions|linebreaks }}</p>
+</div>
+
+<a href="{% url 'view_appointments' %}">Back to Appointments</a>
+
+</div>
+
+{% endblock %}

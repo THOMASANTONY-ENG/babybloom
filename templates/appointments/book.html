@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Book Appointment</h2>
+
+<div class="card">
+
+
+<form method="POST">
+    {% csrf_token %}
+
+    <label>Select Baby:</label>
+    <select name="baby">
+        {% for baby in babies %}
+            <option value="{{ baby.id }}">{{ baby.name }}</option>
+        {% endfor %}
+    </select><br>
+
+    <label>Select Doctor:</label>
+    <select name="doctor">
+        {% for doctor in doctors %}
+            <option value="{{ doctor.id }}">{{ doctor }}</option>
+        {% endfor %}
+    </select><br>
+
+    <input type="date" name="date" required><br>
+    <input type="time" name="time" required><br>
+
+    <button>Book</button>
+</form>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ baby.name }} Vaccination Tracker</h2>
+
+<div class="card">
+
+
+{% for vaccine in vaccines %}
+<p>
+    {{ vaccine.name }} ({{ vaccine.recommended_age }})
+
+    {% if vaccine.id in completed %}
+        ✅ Completed
+    {% else %}
+        ❌ Pending
+        <a href="{% url 'mark_vaccine' baby.id vaccine.id %}">Mark Done</a>
+    {% endif %}
+</p>
+{% empty %}
+<p>No vaccines configured.</p>
+{% endfor %}
+</div>
+
+{% endblock %}

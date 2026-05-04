@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>BabyBloom</title>
+</head>
+<body>
+
+  <style id="0d5a3p">
+    body {
+        font-family: Arial, sans-serif;
+        background: #f5f6fa;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        width: 90%;
+        margin: auto;
+        padding: 20px;
+    }
+
+    .card {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+    }
+
+    .section {
+        margin-top: 30px;
+    }
+    nav a {
+    color: white;
+    margin-left: 15px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+</style>
+    <nav style="display:flex; justify-content:space-between; align-items:center; background:#2c3e50; padding:12px 20px;">
+
+    <div>
+        <strong style="color:white;">BabyBloom</strong>
+    </div>
+
+    <div>
+
+        {% if user.is_authenticated %}
+            {% if user.profile.role == "parent" %}
+                <a class="btn" href="/babies/">Babies</a>
+                <a class="btn" href="/appointments/">Appointments</a>
+            {% endif %}
+
+            {% if user.profile.role == "doctor" %}
+                <a class="btn" href="/appointments/doctor/">My Appointments</a>
+            {% endif %}
+
+            {% if user.profile.role == "admin" %}
+                <a class="btn" href="{% url 'admin_dashboard' %}">Dashboard</a>
+                <a class="btn" href="{% url 'doctor_list' %}">Doctors</a>
+                <a class="btn" href="{% url 'vaccine_list' %}">Vaccines</a>
+                <a class="btn" href="{% url 'user_list' %}">Users</a>
+            {% endif %}
+
+            <a  class="btn" href="{% url 'logout' %}">Logout</a>
+
+        {% else %}
+            <a class="btn" href="{% url 'login' %}">Login</a>
+        {% endif %}
+
+    </div>
+</nav>
+
+    <hr>
+
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+</body>
+</html>

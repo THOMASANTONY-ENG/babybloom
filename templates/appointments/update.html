@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Update Appointment</h2>
+
+<div class="card">
+
+
+<p>
+    {{ appointment.baby.name }} with {{ appointment.doctor }}
+</p>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <select name="status">
+        <option value="scheduled">Scheduled</option>
+        <option value="completed">Completed</option>
+        <option value="no_show">No Show</option>
+    </select>
+
+    <button type="submit">Update</button>
+</form>
+
+</div>
+
+{% endblock %}

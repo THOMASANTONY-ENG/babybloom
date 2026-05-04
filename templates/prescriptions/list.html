@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Your Prescriptions</h2>
+
+<div class="card">
+
+
+{% for p in prescriptions %}
+    <div style="border:1px solid #000; padding:10px; margin:10px;">
+        
+        <p><strong>Baby:</strong> {{ p.appointment.baby.name }}</p>
+        <p><strong>Doctor:</strong> {{ p.appointment.doctor }}</p>
+        <p><strong>Date:</strong> {{ p.appointment.date }}</p>
+
+        <p><strong>Medication:</strong> {{ p.medication }}</p>
+        <p><strong>Dosage:</strong> {{ p.dosage }}</p>
+        <p><strong>Instructions:</strong> {{ p.instructions }}</p>
+
+    </div>
+{% empty %}
+    <p>No prescriptions available</p>
+{% endfor %}
+
+</div>
+
+{% endblock %}

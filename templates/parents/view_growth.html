@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>{{ baby.name }} Growth History</h2>
+
+<div class="card">
+
+
+<a href="{% url 'add_growth' baby.id %}">Add New Record</a>
+
+{% for log in logs %}
+    <p>
+        Date: {{ log.date }} |
+        Weight: {{ log.weight }} kg |
+        Height: {{ log.height }} cm
+    </p>
+{% empty %}
+    <p>No records yet</p>
+{% endfor %}
+
+</div>
+
+{% endblock %}
