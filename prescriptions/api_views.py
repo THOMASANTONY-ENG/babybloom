@@ -31,11 +31,11 @@ def add_prescription(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_prescriptions(request):
-    Prescriptions = Prescription.objects.filter(
+    prescriptions = Prescription.objects.filter(
         appointment__baby__parent = request.user
     )
 
-    serializer = PrescriptionSerializer(Prescriptions,many=True)
+    serializer = PrescriptionSerializer(prescriptions,many=True)
     return Response(serializer.data)
 
 
