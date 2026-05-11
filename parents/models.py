@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 # Create your models here.
 class Baby(models.Model):
@@ -21,7 +22,8 @@ class GrowthLog(models.Model):
     weight = models.FloatField()
     height = models.FloatField()    
     
-    date = models.DateField(auto_now_add=True)
+    date = models.DateField(default=timezone.now)
+
 
     def __str__(self):
         return f"{self.baby.name} - {self.date}"

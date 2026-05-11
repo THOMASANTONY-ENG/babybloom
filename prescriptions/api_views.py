@@ -48,4 +48,14 @@ def get_doctor_prescriptions(request):
     )
 
     serializer = PrescriptionSerializer(prescriptions, many=True)
-    return Response(serializer.data)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_prescription_by_appointment(request, appointment_id):
+    prescription = Prescription.objects.filter(appointment_id=appointment_id).first()
+    if not prescription:
+        return Response({"error": "Prescription not found"}, status=404)
+    
+    serializer = PrescriptionSerializer(prescription)
+    return Response(serializer.data)

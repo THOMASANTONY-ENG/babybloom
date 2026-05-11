@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Baby
+from .models import Baby, GrowthLog
 
 class BabySerializer(serializers.ModelSerializer):
     class Meta:
@@ -10,3 +10,7 @@ class BabySerializer(serializers.ModelSerializer):
         if len(value)<2:
             raise serializers.ValidationError("Baby name short")
         return value
+class GrowthLogSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = GrowthLog
+        fields = '__all__'  

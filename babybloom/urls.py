@@ -34,6 +34,8 @@ urlpatterns = [
     path('', include('prescriptions.api_urls')),
       
     path('vaccinations/', include('vaccinations.urls')),
+    path('', include('vaccinations.api_urls')),
     path('doctors/', include('doctors.urls')),
+    path('', include('doctors.api_urls')),
     path('api/token/refresh/', TokenRefreshView.as_view()),
 ]
