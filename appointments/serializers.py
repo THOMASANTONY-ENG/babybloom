@@ -4,6 +4,7 @@ from prescriptions.models import Prescription
 
 class AppointmentSerializer(serializers.ModelSerializer):
     has_prescription = serializers.SerializerMethodField()
+    baby_name = serializers.CharField(source='baby.name', read_only=True)
 
     class Meta:
         model = Appointment

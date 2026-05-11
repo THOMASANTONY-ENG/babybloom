@@ -67,3 +67,19 @@ def get_prescription_by_appointment(request, appointment_id):
     
     serializer = PrescriptionSerializer(prescription)
     return Response(serializer.data)
+
+@api_view(['PUT', 'PATCH'])
+@permission_classes([IsAuthenticated])
+def edit_prescription(request, pk):
+    prescription = get_object_or_404(Prescription, pk=pk)
+    
+    doctor = get_object_or_404(Doctor, user=request.user)
+    if prescription.appointment.doctor != doctor:
+        return Response({'message': 'You are not authorized to edit this prescription'}, status=403)
+
+    serializer = PrescriptionSerializer(prescription, data=request.data, partial=True)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    
+    return Response(serializer.errors, status=400)
