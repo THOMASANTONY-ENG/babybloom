@@ -12,11 +12,19 @@ from django.shortcuts import get_object_or_404
 def add_prescription(request):
     appointment_id = request.data.get('appointment_id')
     appointment = get_object_or_404(Appointment, id=appointment_id)
+    
+    doctor = get_object_or_404(Doctor, user=request.user)
+    if appointment.doctor != doctor:
+        return Response({'message': 'You are not authorized to add prescription for this appointment'}, status=403)
    
     if appointment.status != 'completed':
         return Response({'message': 'Appointment is not completed'}, status=400)
 
+    if hasattr(appointment, 'prescription'):
+        return Response({'message': 'Prescription already exists for this appointment'}, status=400)
+
     data = request.data.copy()
+    data['appointment'] = appointment_id
     serializer = PrescriptionSerializer(data=data)
 
     if serializer.is_valid():
