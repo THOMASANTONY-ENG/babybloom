@@ -7,6 +7,8 @@ from appointments.models import Appointment
 from doctors.models import Doctor
 from django.shortcuts import get_object_or_404
 
+from accounts.models import Notification
+
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def add_prescription(request):
@@ -17,8 +19,8 @@ def add_prescription(request):
     if appointment.doctor != doctor:
         return Response({'message': 'You are not authorized to add prescription for this appointment'}, status=403)
    
-    if appointment.status != 'completed':
-        return Response({'message': 'Appointment is not completed'}, status=400)
+    if appointment.status not in ['approved', 'completed']:
+        return Response({'message': 'Appointment must be approved or completed to add a prescription'}, status=400)
 
     if hasattr(appointment, 'prescription'):
         return Response({'message': 'Prescription already exists for this appointment'}, status=400)
@@ -28,7 +30,11 @@ def add_prescription(request):
     serializer = PrescriptionSerializer(data=data)
 
     if serializer.is_valid():
-        serializer.save()
+        prescription = serializer.save()
+        Notification.objects.create(
+            user=prescription.appointment.baby.parent,
+            message=f"A new prescription has been added for {prescription.appointment.baby.name}."
+        )
         return Response(serializer.data, status=201)
 
     return Response(serializer.errors, status=400)
@@ -79,7 +85,11 @@ def edit_prescription(request, pk):
 
     serializer = PrescriptionSerializer(prescription, data=request.data, partial=True)
     if serializer.is_valid():
-        serializer.save()
+        prescription = serializer.save()
+        Notification.objects.create(
+            user=prescription.appointment.baby.parent,
+            message=f"The prescription for {prescription.appointment.baby.name} has been updated."
+        )
         return Response(serializer.data)
     
     return Response(serializer.errors, status=400)

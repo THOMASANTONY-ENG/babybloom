@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Appointment
+from .models import Appointment, DoctorAvailability
 from prescriptions.models import Prescription
 
 class AppointmentSerializer(serializers.ModelSerializer):
@@ -12,3 +12,13 @@ class AppointmentSerializer(serializers.ModelSerializer):
 
     def get_has_prescription(self, obj):
         return Prescription.objects.filter(appointment=obj).exists()
+
+class DoctorAvailabilitySerializer(
+    serializers.ModelSerializer
+):
+
+    class Meta:
+
+        model = DoctorAvailability
+
+        fields = '__all__'

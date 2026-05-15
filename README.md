@@ -21,3 +21,16 @@ A full-stack application for baby growth tracking and medical management.
 1. `cd frontend`
 2. `npm install`
 3. `npm run dev`
+
+## Environment Configuration
+
+Both the backend and frontend use environment variables for configuration.
+
+### Backend (backend/.env)
+- SECRET_KEY: Django secret key.
+- DEBUG: Set to True for development.
+- ALLOWED_HOSTS: Comma-separated list of allowed hosts.
+- CORS_ALLOWED_ORIGINS: Comma-separated list of frontend URLs.
+
+### Frontend (frontend/.env)
+- VITE_API_URL: URL of the backend API (e.g., http://127.0.0.1:8000).

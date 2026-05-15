@@ -7,6 +7,8 @@ class Doctor(models.Model):
 
     speciality = models.CharField(max_length=100)
     experience = models.CharField(max_length=100)
+    bio = models.TextField(blank=True, null=True)
+    image = models.ImageField(upload_to='doctors/', blank=True, null=True)
     
     def __str__(self):
         return f"Dr {self.user.username}"
